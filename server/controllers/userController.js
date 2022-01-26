@@ -195,7 +195,7 @@ exports.updateUser = (req, res) => {
     console.log("Connected as ID " + connection.threadId);
 
     connection.query("UPDATE accounts SET permissions_id = ?, username = ?, password = ?, first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE account_id = ?",
-    [permissions, username, password, first_name, last_name, email, phone,  comments],
+    [permissions, username, password, first_name, last_name, email, phone,  comments, req.params.id],
       (err, rows) => {
         if (!err) {
           editUser(res, req, connection, "Updated User.");

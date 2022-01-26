@@ -153,8 +153,11 @@ exports.createUser = (req, res) => {
     if (err) throw err; // Not connected!
     console.log("Connected as ID " + connection.threadId);
 
-    connection.query("INSERT INTO accounts SET permissions_id = ?, username = ?, password = ?, first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?",
-    [permissions, username, password, first_name, last_name, email, phone,  comments], (err, rows) => {
+    var today = new Date();
+    var time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    
+    connection.query("INSERT INTO accounts SET permissions_id = ?, username = ?, password = ?, first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?, date_created = ?",
+    [permissions, username, password, first_name, last_name, email, phone,  comments, time], (err, rows) => {
         connection.release();
 
         if (!err) {
